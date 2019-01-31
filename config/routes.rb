@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
 
   resources :items
-  
+   resources :charges
   resources :item, only: [:show ] do 
       resources :charges
   end
