@@ -25,4 +25,4 @@
 
 <br>
 
-<%= link_to 'New Item', new_item_path %>
+<%= link_to 'New Item', new_item_path  if user_signed_in? && admin? %>
