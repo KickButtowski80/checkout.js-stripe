@@ -1,6 +1,6 @@
 module ApplicationHelper
     def admin_types
-        ['admin_user']
+        ['admin user']
     end
     
     def active? path 
@@ -9,5 +9,13 @@ module ApplicationHelper
     
     def admin?
         admin_types.include? current_user.user_type
+    end
+    
+    def user_type_color 
+        if admin?
+            "btn btn-info"
+        else
+            "btn btn-secondary"
+        end
     end
 end
