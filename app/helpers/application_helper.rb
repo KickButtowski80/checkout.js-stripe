@@ -8,6 +8,6 @@ module ApplicationHelper
     end
     
     def admin?
-        admin_types.include? curent_user.type
+        admin_types.include? current_user.user_type
     end
 end
