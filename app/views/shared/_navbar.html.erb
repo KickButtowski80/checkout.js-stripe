@@ -4,10 +4,11 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
-    <ul class="navbar-nav ">
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
     <% if user_signed_in? %>
       <li class="nav-item ">
             <%= link_to 'Sign out', destroy_user_session_path, style: "color: black;", class: 'btn btn-primary' %>
+            <%= current_user.user_type %>
       </li>
     <% else %>
             <%= link_to 'Sign in', new_user_session_path, style: "color: black;", class: 'btn btn-primary' %>

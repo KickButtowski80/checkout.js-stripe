@@ -15,7 +15,7 @@
   
      <script src="https://checkout.stripe.com/checkout.js"></script>
 
-      <%= form_tag item_charges_path(@item, amount: @item.price), id: 'paying-form' do %>
+      <%= form_tag item_charges_path( @item , amount: @item.price)  , id: 'paying-form' do %>
           <% if flash[:error].present? %>
             <div id="error_explanation">
               <p><%= flash[:error] %></p>
@@ -45,14 +45,15 @@
                 $('form').submit();
               }
             });
-          document.getElementById('payNowButton').addEventListener('click', function(e) {
-            
+          document.getElementById('payNowButton').addEventListener('click', function(e) {            
               e.preventDefault();
               var amount = <%= @item.price %>;    
               amount = amount * 100; // Needs to be an integer!
+              amount = Math.round(amount)
               handler.open({
-                amount: Math.round(amount)
+                amount: amount
               })
+            
             });
 
             $(window).on('popstate', function() {
