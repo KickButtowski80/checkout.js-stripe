@@ -1,6 +1,7 @@
 class ItemsController < ApplicationController
+  include ApplicationHelper
   before_action :set_item, only: [:show, :edit, :update, :destroy]
-
+  before_action :check_for_admin, only:[ :edit, :update, :destroy]
   # GET /items
   # GET /items.json
   def index
@@ -70,5 +71,11 @@ class ItemsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def item_params
       params.require(:item).permit(:name, :price)
+    end
+    
+    def check_for_admin
+      unless user_signed_in? &&  admin?
+        redirect_to root_path , notice: 'you need to be admin or signed in to edit this item'
+      end
     end
 end
