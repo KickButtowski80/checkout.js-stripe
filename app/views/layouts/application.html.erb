@@ -8,7 +8,9 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'https://js.stripe.com/v3/' %>
+     <%= javascript_include_tag "https://checkout.stripe.com/checkout.js" , 'data-turbolinks-track': 'reload'  %>
     <%= tag :meta, name: "stripe-key", content: Rails.application.credentials.stripe_publishable_key %>
+    
   </head>
 
   <body> <%= render 'shared/navbar' %>
@@ -20,6 +22,6 @@
         
       </div>
     </div>
-
+  
   </body>
 </html>
