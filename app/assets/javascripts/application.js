@@ -10,13 +10,21 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery3
-//= require popper
 //= require bootstrap-sprockets
-//= require rails-ujs
+//= require jquery
+//= require jquery_ujs
+//= require bootstrap
 //= require activestorage
 //= require turbolinks
 //= require_tree .
+
+
+$(document).on('ready turbolinks:load', function() {
+    $( "#navbarDropdown" ).click(function() {
+      console.log( "Handler for .click() called." );
+     
+    });
+});
  
 
 

@@ -8,12 +8,21 @@
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
     <% if user_signed_in? %>
       <li class="nav-item ">
-            <%= content_tag :div, class: user_type_color  do %>
+            <%= content_tag :div, class: user_type_color if admin? do %>
              <%= current_user.user_type %>
-            <% end %>
-            
+            <% end %>      
+            <li class="dropdown">
+              <a class="nav-link dropdown-toggle btn btn-primary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Actions
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">Purchased List</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
             <%= link_to 'Sign out', destroy_user_session_path, style: "color: black;", class: 'btn btn-primary' %>
-            
       </li>
     <% else %>
             <%= link_to 'Sign in', new_user_session_path, style: "color: black;", class: 'btn btn-primary' %>
