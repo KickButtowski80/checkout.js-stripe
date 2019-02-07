@@ -1,29 +1,65 @@
 <p id="notice"><%= notice %></p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+     <p>
+      <strong id="item_name" >Name:</strong> 
+        <span >
+          <%= @item.name %>
+        </span>
+      </p>  
+      <p>
+        <strong>Price:</strong>
+        <%= @item.price %>
+      </p>
+  
+     <!--<script src=""></script>-->
+    
+      <%= form_tag item_charges_path( @item , amount: @item.price)  , id: 'paying-form' do %>
+          <% if flash[:error].present? %>
+            <div id="error_explanation">
+              <p><%= flash[:error] %></p>
+            </div>
+          <% end %>
+          <%= hidden_field_tag :stripeToken  %>       
+        <% if user_signed_in? %>
+          <button id='payNowButton' class='btn btn-primary'>Pay Now</button>
+        <% end %>
+      <% end %> 
+        <%= link_to 'Edit | ', edit_item_path(@item) if user_signed_in? && admin? %> 
+        <%= link_to 'Back', items_path %>
+              
+        
+          <script>
+          $(document ).ready(function() {
+            var handler = StripeCheckout.configure({
+              key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+              locale: 'auto',
+              description: "Buying " + $('#item_name').next().text().trim(),
+              image: "https://stripe.com/img/documentation/checkout/marketplace.png",
+              name: 'IT',
+              //this is a call back which is called when handler gets open and finsish the modal
+              token: function(token) {   
+                $('input#stripeToken').val(token.id);               
+                $('form').submit();
+              }
+            });
+          document.getElementById('payNowButton').addEventListener('click', function(e) {            
+              e.preventDefault();
+              var amount = <%= @item.price %>;    
+              amount = amount * 100; // Needs to be an integer!
+              amount = Math.round(amount)
+              handler.open({
+                amount: amount
+              })
+            
+            });
 
-<p>
-  <strong>Name:</strong>
-  <%= @item.name %>
-</p>
-
-<p>
-  <strong>Price:</strong>
-  <%= @item.price %>
-</p>
-
-
-<%= form_tag item_charges_path(@item, amount: @item.price) do  %>
-  <article>
-    <% if flash[:error].present? %>
-      <div id="error_explanation">
-        <p><%= flash[:error] %></p>
-      </div>
-    <% end %>
-  </article>
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="A month's subscription"
-          data-amount=<%= @item.price %>
-          data-locale="auto"></script>
-<% end %>
-<%= link_to 'Edit', edit_item_path(@item) %> |
-<%= link_to 'Back', items_path %>
+            $(window).on('popstate', function() {
+              handler.close();
+            });
+          });
+          </script>
+    </div>
+  </div>
+</div>
