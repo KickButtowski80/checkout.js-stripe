@@ -18,12 +18,5 @@
 //= require_tree .
 
 
-$(document).on('ready turbolinks:load', function() {
-    $( "#navbarDropdown" ).click(function() {
-      console.log( "Handler for .click() called." );
-     
-    });
-});
- 
 
 
