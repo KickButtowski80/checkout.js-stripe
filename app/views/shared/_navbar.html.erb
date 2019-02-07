@@ -8,9 +8,6 @@
     <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
     <% if user_signed_in? %>
       <li class="nav-item ">
-            <%= content_tag :div, class: user_type_color if admin? do %>
-             <%= current_user.user_type %>
-            <% end %>      
             <li class="dropdown">
               <a class="nav-link dropdown-toggle btn btn-primary" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Actions
