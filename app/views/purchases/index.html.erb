@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row" style="margin-top: 22px;">
         <!--<div class="col-3 col-md-3">-->
-            <% current_user.purchases.load.each do |p| %>        
+            <% current_user.purchases.each do |p| %>        
                 <div class="card" style="margin-right: 20px;">       
                   <div class="card-body">
                     <h5 class="card-title"><%= p.item.name %></h5>
