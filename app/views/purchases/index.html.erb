@@ -1,0 +1,18 @@
+<div class="container">
+    <div class="row">
+        <!--<div class="col-3 col-md-3">-->
+            <% current_user.purchases.load.each do |p| %>        
+                <div class="card" style="">       
+                  <div class="card-body">
+                    <h5 class="card-title"><%= p.item.name %></h5>
+                    <p class="card-text"><%= p.item.price %></p> 
+                    <%= link_to 'See Item', item_path(p.item.id), class: 'btn btn-primary' %>
+                  </div>
+                </div>    
+            <% end %>
+         <!--</div>-->
+    </div>
+</div>
+
+
+    
