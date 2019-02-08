@@ -4,7 +4,7 @@ class ChargesController < ApplicationController
 
 def create
   # Amount in cents
-   debugger
+  # debugger
    @amount = params[:amount].to_f
    
   customer = Stripe::Customer.create(
@@ -14,8 +14,7 @@ def create
   
 
   charge = Stripe::Charge.create(
-    :customer    => current_user.id,
-    :source  => params[:stripeToken],
+    :customer => customer.id,
     :amount      =>  (@amount * 100).to_i, 
     :description => 'Valued IT customer',
     :currency    => 'usd'
