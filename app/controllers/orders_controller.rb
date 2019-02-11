@@ -24,7 +24,7 @@ class OrdersController < ApplicationController
     respond_to do |format|
       if @order.save!
             format.html {redirect_to root_path , notice: "item added to your order list, totalll price so far #{$sum}"}
-            
+            format.json 
       end
     end
   end
