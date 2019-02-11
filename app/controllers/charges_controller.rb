@@ -22,7 +22,7 @@ def create
  
  if charge.paid
   made_purchase = Purchase.create item_id: params[:format] , user_id: current_user.id
-   
+  Order.delete_all  
    
  end
 

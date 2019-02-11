@@ -1,2 +1,72 @@
-<h1>Orders#index</h1>
-<p>Find me in app/views/orders/index.html.erb</p>
+<ol>
+<% Order.all.each do |order| %>
+  <li>
+     <%=order.purchase.item.name%>  price is <span class="price btn btn-info"><%=order.purchase.item.price%> </span>
+  </li>
+<% end %>
+</ol> 
+
+<span>Total : </span><span class="btn btn-secondary" id="result"><%= @total_price%></span> 
+
+     <%= form_tag charges_path(@item , amount:  @total_price )  , id: 'paying-form' do %>
+          <% if flash[:error].present? %>
+            <div id="error_explanation">
+              <p><%= flash[:error] %></p>
+            </div>
+          <% end %>
+          <%= hidden_field_tag :stripeToken  %>       
+        <% if user_signed_in? && @total_price > 0  %>
+          <button id='payNowButton' class='btn btn-primary'>Pay Now</button>
+        <% else %>
+        <div class="btn btn-warning">You need to add some items to your checkout</div>
+        <% end %>
+      <% end %> 
+        <br />
+
+          <script>
+          $(document ).ready(function() {           
+              var handler = StripeCheckout.configure({
+              key: '<%= Rails.configuration.stripe[:publishable_key] %>',
+              locale: 'auto',
+              description: "Buying " + $('#item_name').next().text().trim(),
+              image: "https://stripe.com/img/documentation/checkout/marketplace.png",
+              name: 'IT',
+              //this is a call back which is called when handler gets open and finsish the modal
+              token: function(token) {   
+                $('input#stripeToken').val(token.id);               
+                $('form').submit();
+              }
+            });
+          document.getElementById('payNowButton').addEventListener('click', function(e) {            
+              e.preventDefault();
+              var amount = parseFloat(document.getElementById('result').innerHTML);  
+              amount = amount * 100; // Needs to be an integer!
+              amount = Math.round(amount)
+              handler.open({
+                amount: amount
+              })
+            
+            });
+
+            $(window).on('popstate', function() {
+              handler.close();
+            });
+          });
+          
+              fetch(`/orders`, {
+                  method: "GET",
+                      headers: {
+                          "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                      })
+                        .then(response => {
+                          return response.json();
+                        });
+          
+
+          </script>
+ 
+    
+
+

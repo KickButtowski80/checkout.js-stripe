@@ -9,6 +9,7 @@
     <% if user_signed_in? %>
       <li class="nav-item ">
             <%= link_to 'list of Purchases', purchases_path, class: 'btn btn-info' %>
+            <%= link_to 'list of orders', orders_path, class: 'btn btn-danger' %>
             <%= link_to 'Sign out', destroy_user_session_path, style: "color: black;", class: 'btn btn-primary' %>
       </li>
     <% else %>

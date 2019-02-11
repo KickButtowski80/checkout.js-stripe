@@ -1,4 +1,4 @@
 class Order < ApplicationRecord
-  belongs_to :user
-  has_many :purchases
+    belongs_to :purchase 
+    belongs_to :user
 end
