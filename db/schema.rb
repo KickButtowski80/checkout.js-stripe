@@ -20,10 +20,12 @@ ActiveRecord::Schema.define(version: 2019_02_11_222135) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.integer "purchase_id"
-    t.integer "user_id"
-    t.index ["purchase_id"], name: "index_orders_on_purchase_id"
-    t.index ["user_id"], name: "index_orders_on_user_id"
+    t.integer "purchases_id"
+    t.integer "users_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["purchases_id"], name: "index_orders_on_purchases_id"
+    t.index ["users_id"], name: "index_orders_on_users_id"
   end
 
   create_table "purchases", force: :cascade do |t|
