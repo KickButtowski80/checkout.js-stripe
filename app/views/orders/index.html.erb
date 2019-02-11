@@ -1,14 +1,14 @@
 <ol>
 <% @orders.load.each do |order| %>
   <li>
-     <%=order.purchase.item.name%>  price is <span class="price btn btn-info"><%=order.purchase.item.price%> </span>
+     <%=order.item.name%>  price is <span class="price btn btn-info"><%=order.item.price%> </span>
   </li>
 <% end %>
 </ol> 
 
 <span>Total : </span><span class="btn btn-secondary" id="result"><%= @total_price%></span> 
 
-     <%= form_tag charges_path(amount:  @total_price )  , id: 'paying-form' do %>
+     <%= form_tag charges_path(amount:  @total_price, item_ids: @item_ids )  , id: 'paying-form' do %>
           <% if flash[:error].present? %>
             <div id="error_explanation">
               <p><%= flash[:error] %></p>

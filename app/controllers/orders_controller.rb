@@ -5,12 +5,13 @@ class OrdersController < ApplicationController
   def index
     @orders = Order.all
     $sum = 0.0
+    item_ids = []
     @orders.each do |order|
-      $sum = $sum + order.purchase.item.price
+      item_ids.push(order.item.id)
+      $sum = $sum + order.item.price
     end
     @total_price = $sum
-    
-    # render json: @orders
+    @item_ids = item_ids
   end
   
   def new
@@ -18,8 +19,8 @@ class OrdersController < ApplicationController
   
   def create
    
-    purchase = Purchase.create!(user_id: current_user.id , item_id: params[:item_id] )
-    @order = Order.new user_id: current_user.id, purchase_id: purchase.id
+    # purchase = Purchase.create!(user_id: current_user.id , item_id: params[:item_id] )
+    @order = Order.new user_id: current_user.id, item_id: params[:item_id] 
     
     respond_to do |format|
       if @order.save!
@@ -37,9 +38,7 @@ class OrdersController < ApplicationController
   
   private
   
-  def purchase_params
-    params.require(:order).premit(:user_id, :item_id)
-  end
+ 
   
    def sanitize_page_params
     params[:user_id] = params[:user_id].to_i
