@@ -11,8 +11,7 @@
       <p>
         <strong>Price:</strong>
         <%= @item.price %>
-      </p>
-    
+      </p>    
       <%= form_tag charges_path(@item , amount: @item.price)  , id: 'paying-form' do %>
           <% if flash[:error].present? %>
             <div id="error_explanation">
@@ -24,6 +23,10 @@
           <button id='payNowButton' class='btn btn-primary'>Pay Now</button>
         <% end %>
       <% end %> 
+        <% if user_signed_in? %>
+          <%= link_to "Add Checkout", orders_path( item_id: @item.id, user_id: current_user.id) , class: 'btn btn-success', id: 'add-checkout-button' %>
+        <% end %>
+        <br />
         <%= link_to 'Edit | ', edit_item_path(@item) if user_signed_in? && admin? %> 
         <%= link_to 'Back', items_path %>
               
