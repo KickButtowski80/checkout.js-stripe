@@ -4,12 +4,24 @@
     <title>Workspace</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'https://js.stripe.com/v3/' %>
+    <%= javascript_include_tag "https://checkout.stripe.com/checkout.js" , 'data-turbolinks-track': 'reload'  %>
+    <%= tag :meta, name: "stripe-key", content: Rails.application.credentials.stripe_publishable_key %>
+    
   </head>
 
-  <body>
-    <%= yield %>
+  <body> <%= render 'shared/navbar' %>
+    <div class="container">
+      <div class="row"> 
+       <div class="col-md-12">
+         <%= yield %>  
+       </div>
+        
+      </div>
+    </div>
+
   </body>
 </html>

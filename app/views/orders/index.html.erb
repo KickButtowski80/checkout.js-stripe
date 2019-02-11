@@ -1,39 +1,31 @@
-<p id="notice"><%= notice %></p>
-<div class="container">
-  <div class="row">
-    <div class="col-md-12">
-     <p>
-      <strong id="item_name" >Name:</strong> 
-        <span >
-          <%= @item.name %>
-        </span>
-      </p>  
-      <p>
-        <strong>Price:</strong>
-        <%= @item.price %>
-      </p>    
-      <%= form_tag charges_path(@item , amount: @item.price)  , id: 'paying-form' do %>
+<ol>
+<% Order.all.each do |order| %>
+  <li>
+     <%=order.purchase.item.name%>  price is <span class="price btn btn-info"><%=order.purchase.item.price%> </span>
+  </li>
+<% end %>
+</ol> 
+
+<span>Total : </span><span class="btn btn-secondary" id="result"><%= @total_price%></span> 
+
+     <%= form_tag charges_path(@item , amount:  @total_price )  , id: 'paying-form' do %>
           <% if flash[:error].present? %>
             <div id="error_explanation">
               <p><%= flash[:error] %></p>
             </div>
           <% end %>
           <%= hidden_field_tag :stripeToken  %>       
-        <% if user_signed_in? %>
+        <% if user_signed_in? && @total_price > 0  %>
           <button id='payNowButton' class='btn btn-primary'>Pay Now</button>
+        <% else %>
+        <div class="btn btn-warning">You need to add some items to your checkout</div>
         <% end %>
       <% end %> 
-        <% if user_signed_in? %>
-          <%= link_to "Add Checkout", orders_path( item_id: @item.id, user_id: current_user.id), method: :post , class: 'btn btn-success', id: 'add-checkout-button' %>
-        <% end %>
         <br />
-        <%= link_to 'Edit | ', edit_item_path(@item) if user_signed_in? && admin? %> 
-        <%= link_to 'Back', items_path %>
-              
-        
+
           <script>
-          $(document ).ready(function() {
-            var handler = StripeCheckout.configure({
+          $(document ).ready(function() {           
+              var handler = StripeCheckout.configure({
               key: '<%= Rails.configuration.stripe[:publishable_key] %>',
               locale: 'auto',
               description: "Buying " + $('#item_name').next().text().trim(),
@@ -47,7 +39,7 @@
             });
           document.getElementById('payNowButton').addEventListener('click', function(e) {            
               e.preventDefault();
-              var amount = <%= @item.price %>;    
+              var amount = parseFloat(document.getElementById('result').innerHTML);  
               amount = amount * 100; // Needs to be an integer!
               amount = Math.round(amount)
               handler.open({
@@ -60,7 +52,21 @@
               handler.close();
             });
           });
+          
+              fetch(`/orders`, {
+                  method: "GET",
+                      headers: {
+                          "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(data)
+                      })
+                        .then(response => {
+                          return response.json();
+                        });
+          
+
           </script>
-    </div>
-  </div>
-</div>
+ 
+    
+
+

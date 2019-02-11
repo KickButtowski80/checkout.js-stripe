@@ -1,0 +1,22 @@
+<nav class="navbar navbar-dark bg-primary navbar-expand-lg">
+  
+  <%= link_to "Buying Item", root_path, class: 'navbar-brand' %>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
+    <% if user_signed_in? %>
+      <li class="nav-item ">
+            <%= link_to 'list of Purchases', purchases_path, class: 'btn btn-info' %>
+            <%= link_to 'list of orders', orders_path, class: 'btn btn-danger' %>
+            <%= link_to 'Sign out', destroy_user_session_path, style: "color: black;", class: 'btn btn-primary' %>
+      </li>
+    <% else %>
+            <%= link_to 'Sign in', new_user_session_path, style: "color: black;", class: 'btn btn-primary' %>
+            <%= link_to 'Sign up', new_user_registration_path, style: "color: black;" , class: 'btn btn-primary'%>
+    
+    <% end %>
+    </ul>
+  </div>
+</nav>
