@@ -1,12 +1,7 @@
-<ol>
-<% @orders.load.each do |order| %>
-  <li>
-     <%=order.item.name%>  price is <span class="price btn btn-info"><%=order.item.price%> </span>
-  </li>
-<% end %>
-</ol> 
-
-<span>Total : </span><span class="btn btn-secondary" id="result"><%= @total_price%></span> 
+<div class='text-warning' style="margin-top: 20px; margin-bottom: 10px;">
+     <%= listing_orders_times( @orders.load) %>
+</div>
+<p style="margin-top: 15px;">Total : </span><span class="btn btn-secondary" id="result"><%= @total_price%></p> 
 
      <%= form_tag charges_path(amount:  @total_price, item_ids: @item_ids )  , id: 'paying-form' do %>
           <% if flash[:error].present? %>
