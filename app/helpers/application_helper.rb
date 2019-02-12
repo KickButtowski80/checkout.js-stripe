@@ -1,5 +1,4 @@
 module ApplicationHelper
-    include ActionView::Helpers::UrlHelper
     def admin_types
         ['admin user']
     end
