@@ -10,7 +10,7 @@
     <%= javascript_include_tag 'application', 'https://js.stripe.com/v3/' %>
     <%= javascript_include_tag "https://checkout.stripe.com/checkout.js" , 'data-turbolinks-track': 'reload'  %>
     <%= tag :meta, name: "stripe-key", content: Rails.application.credentials.stripe_publishable_key %>
-    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 
   <body> <%= render 'shared/navbar' %>
