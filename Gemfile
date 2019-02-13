@@ -68,5 +68,5 @@ gem 'devise'
 gem 'devise-bootstrap-views' 
 gem 'rails-erd', group: :development
 
-gem 'actionpack-action_caching'
-gem 'rack-mini-profiler'
+ 
+gem 'rack-mini-profiler', require: false
