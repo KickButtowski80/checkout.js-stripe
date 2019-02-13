@@ -51,6 +51,7 @@ group :development do
   gem 'sqlite3'
   gem "better_errors"
   gem "binding_of_caller"
+  gem 'rack-mini-profiler', require: false
 end
 
 
@@ -60,7 +61,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'stripe'
 gem 'figaro'
 gem 'pg'
-gem 'rack-mini-profiler', require: false
+
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'devise'

@@ -1,10 +1,14 @@
 class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
-  before_action do
-      if current_user && admin?
-        Rack::MiniProfiler.authorize_request
-      end
-    end
+  # before_action do
+    
+ 
+  #     if current_user &&  current_user.is_admin?
+  #       Rack::MiniProfiler.authorize_request
+  #     end
+  #   end
+  
+    
   protected
 
   def configure_permitted_parameters
