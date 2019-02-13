@@ -30,8 +30,8 @@
         <%= link_to 'Edit | ', edit_item_path(@item) if user_signed_in? && admin? %> 
         <%= link_to 'Back', items_path %>
               
-        
-          <script>
+<% content_for :head do %>
+  <script type="text/javascript">
           $(document ).ready(function() {
             var handler = StripeCheckout.configure({
               key: '<%= Rails.configuration.stripe[:publishable_key] %>',
@@ -61,6 +61,7 @@
             });
           });
           </script>
+          <% end %>
     </div>
   </div>
 </div>
