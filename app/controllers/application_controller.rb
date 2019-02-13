@@ -1,9 +1,9 @@
 class ApplicationController < ActionController::Base
   include ApplicationHelper
   before_action :configure_permitted_parameters, if: :devise_controller?
-  # before_action do       
-  #       Rack::MiniProfiler.authorize_request     
-  #   end
+  before_action do       
+        Rack::MiniProfiler.authorize_request     
+    end
   
     
   protected
