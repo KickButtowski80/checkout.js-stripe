@@ -2,7 +2,7 @@ class ItemsController < ApplicationController
   include ApplicationHelper
   before_action :set_item, only: [:show, :edit, :update, :destroy]
   before_action :check_for_admin, only:[ :edit, :update, :destroy]
-  caches_action :show
+  #caches_action :show
   # GET /items
   # GET /items.json
   def index
