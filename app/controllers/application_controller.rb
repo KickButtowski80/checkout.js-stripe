@@ -1,12 +1,11 @@
 class ApplicationController < ActionController::Base
+  include ApplicationHelper
   before_action :configure_permitted_parameters, if: :devise_controller?
-  # before_action do
-    
- 
-  #     if current_user &&  current_user.is_admin?
-  #       Rack::MiniProfiler.authorize_request
-  #     end
-  #   end
+  before_action do 
+      if user_signed_in? &&  admin?
+        Rack::MiniProfiler.authorize_request
+      end
+    end
   
     
   protected

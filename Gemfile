@@ -51,7 +51,7 @@ group :development do
   gem 'sqlite3'
   gem "better_errors"
   gem "binding_of_caller"
-  gem 'rack-mini-profiler', require: false
+  
 end
 
 
@@ -69,3 +69,4 @@ gem 'devise-bootstrap-views'
 gem 'rails-erd', group: :development
 
 gem 'actionpack-action_caching'
+gem 'rack-mini-profiler', require: false
