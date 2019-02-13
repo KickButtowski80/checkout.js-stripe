@@ -8,7 +8,7 @@ class Order < ApplicationRecord
        @@sum = 0.0
        @@item_ids = []
         Order.includes(:item).all.each do |order|
-          item_ids.push(order.item.id)
+          @@item_ids.push(order.item.id)
           @@sum = @@sum + order.item.price
         end 
        
