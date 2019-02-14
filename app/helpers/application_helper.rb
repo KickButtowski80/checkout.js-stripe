@@ -66,10 +66,11 @@ module ApplicationHelper
     
         def current_price price
         if price.nil?
-            "<span class='btn btn-secondary'>0.0 </span> <br />
+            "<span class='btn btn-secondary'>0.0</span> <br />
             <p class='btn btn-warning'> please add some orders to your checkout  </p>".html_safe
         else
-            price
+            "<span class='btn btn-secondary'>#{price}</span> <br />".html_safe
+           
         end
     end
     

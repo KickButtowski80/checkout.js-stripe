@@ -62,7 +62,7 @@ gem 'stripe'
 gem 'figaro'
 gem 'pg'
 gem 'rack-mini-profiler'
-# , require: false
+#, require: false
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'devise'
