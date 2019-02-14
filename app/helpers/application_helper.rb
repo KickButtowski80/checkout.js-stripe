@@ -20,7 +20,7 @@ module ApplicationHelper
     end
     
     def listing_orders_times orders
-        hash = orders.pluck(:item_id).each_with_object(Hash.new(0)){|key,hash| hash[key] += 1} 
+        hash = orders.joins(:item).pluck(:item_id).each_with_object(Hash.new(0)){|key,hash| hash[key] += 1} 
         result = "<ol>"
         hash.each do |order_item, number| 
             item = Item.find order_item
