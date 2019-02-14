@@ -61,7 +61,7 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'stripe'
 gem 'figaro'
 gem 'pg'
-gem 'rack-mini-profiler'
+gem 'rack-mini-profiler', require: false
 gem 'bootstrap'
 gem 'jquery-rails'
 gem 'devise'
@@ -70,4 +70,4 @@ gem 'rails-erd', group: :development
 
  
 
-# , require: false
+# 

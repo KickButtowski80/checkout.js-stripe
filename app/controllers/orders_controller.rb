@@ -1,11 +1,17 @@
 class OrdersController < ApplicationController
   before_action :sanitize_page_params
-
+   responders :flash
+   respond_to :json
   def index
-    @orders = Order.all
-
-    @total_price = Order.total_price_and_items_order.sum
-    @item_ids =  Order.total_price_and_items_order.item_ids
+    @orders = Order.includes(:item).all
+    $sum = 0.0
+    item_ids = []
+    @orders.each do |order|
+      item_ids.push(order.item.id)
+      $sum = $sum + order.item.price
+    end
+    @total_price = $sum
+    @item_ids = item_ids
   end
   
   def new
