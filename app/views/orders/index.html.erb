@@ -1,8 +1,11 @@
 <div class='text-warning' style="margin-top: 20px; margin-bottom: 10px;">
      <%= listing_orders_times( @orders.load) if  @orders %>
 </div>
-<p style="margin-top: 15px;">Total : </span><%= current_price @total_price %></p> 
-<% unless @total_price.nil? && @item_ids.nil? %>
+<p style="margin-top: 15px;">
+  Total : 
+    <%= current_price @total_price %>
+</p> 
+<%# unless @total_price.nil? && @item_ids.nil? %>
      <%= form_tag charges_path(amount:  @total_price  , item_ids: @item_ids )  , id: 'paying-form' do %>
           <% if flash[:error].present? %>
             <div id="error_explanation">
@@ -10,13 +13,11 @@
             </div>
           <% end %>
           <%= hidden_field_tag :stripeToken  %> 
-      
-        <% unless user_signed_in?  %>
+          <%unless @total_price.nil? %>
           <button id='payNowButton' class='btn btn-primary'>Pay Now</button>
-
-        <% end %>
+          <% end %>
       <% end %> 
-  <% end %>
+  <%# end %>
         <br />
 
           <script>

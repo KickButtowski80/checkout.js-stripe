@@ -21,17 +21,16 @@
           <%= hidden_field_tag :stripeToken  %>       
         <% if user_signed_in? %>
           <button id='payNowButton' class='btn btn-primary'>Pay Now</button>
+            <%= link_to "Add Checkout", orders_path( item_id: @item.id, user_id: current_user.id), method: :post , class: 'btn btn-success', id: 'add-checkout-button' %>
         <% end %>
       <% end %> 
-        <% if user_signed_in? %>
-          <%= link_to "Add Checkout", orders_path( item_id: @item.id, user_id: current_user.id), method: :post , class: 'btn btn-success', id: 'add-checkout-button' %>
-        <% end %>
+   
         <br />
         <%= link_to 'Edit | ', edit_item_path(@item) if user_signed_in? && admin? %> 
         <%= link_to 'Back', items_path %>
               
-<% content_for :head do %>
-  <script type="text/javascript">
+
+  <script>
           $(document ).ready(function() {
             var handler = StripeCheckout.configure({
               key: '<%= Rails.configuration.stripe[:publishable_key] %>',
@@ -61,7 +60,7 @@
             });
            });
           </script>
-      <% end %>
+
     </div>
   </div>
 </div>

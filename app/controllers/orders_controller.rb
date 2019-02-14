@@ -3,7 +3,10 @@ class OrdersController < ApplicationController
    responders :flash
    respond_to :json
   def index
-    @orders = Order.all      
+    
+     @orders = Order.all.joins(:user).where(user_id: current_user.id)
+    if @orders
+    
     # $sum = 0.0
     # item_ids = []
     # @orders.load.each do |order|
@@ -15,7 +18,7 @@ class OrdersController < ApplicationController
     
      @total_price = @orders.joins(:item).pluck(:price).inject(:+)
      @item_ids = @orders.joins(:item).pluck(:id)
-   
+    end 
   end
   
   def new

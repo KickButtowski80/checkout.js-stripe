@@ -68,7 +68,3 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'devise-bootstrap-views' 
 # gem 'rails-erd', group: :development
-
- 
-
-# 

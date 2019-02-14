@@ -22,15 +22,15 @@ def create
  
  if charge.paid
   # debugger 
-  if params[:format].present?
-    made_purchase = Purchase.create item_id: params[:format] , user_id: current_user.id
-  else
-    item_ids = params[:item_ids].map(&:to_i)
-    item_ids.each do |i_id|
-      Purchase.create item_id: i_id, user_id: current_user.id
+  if params.has_key?(:item_ids)
+     params[:item_ids].map(&:to_i).each do |i_id|
+      Purchase.create! item_id: i_id, user_id: current_user.id
     end
+  else
+     Purchase.create item_id: params[:format] , user_id: current_user.id  
   end
-  Order.delete_all  
+  
+  Order.all.joins(:user).where(user_id: current_user.id).delete_all  
    
  end
 
