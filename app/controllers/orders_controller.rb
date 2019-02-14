@@ -1,5 +1,4 @@
 class OrdersController < ApplicationController
-  include OrderHelper
   before_action :sanitize_page_params
    responders :flash
    respond_to :json
