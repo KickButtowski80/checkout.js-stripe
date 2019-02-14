@@ -1,21 +1,23 @@
 <div class='text-warning' style="margin-top: 20px; margin-bottom: 10px;">
-     <%= listing_orders_times( @orders.load) %>
+     <%= listing_orders_times( @orders.load) if  @orders %>
 </div>
-<p style="margin-top: 15px;">Total : </span><span class="btn btn-secondary" id="result"><%= @total_price%></p> 
-
-     <%= form_tag charges_path(amount:  @total_price, item_ids: @item_ids )  , id: 'paying-form' do %>
+<p style="margin-top: 15px;">Total : </span><%= current_price @total_price %></p> 
+<% unless @total_price.nil? && @item_ids.nil? %>
+     <%= form_tag charges_path(amount:  @total_price  , item_ids: @item_ids )  , id: 'paying-form' do %>
           <% if flash[:error].present? %>
             <div id="error_explanation">
               <p><%= flash[:error] %></p>
             </div>
           <% end %>
-          <%= hidden_field_tag :stripeToken  %>       
-        <% if user_signed_in? && @total_price > 0  %>
+          <%= hidden_field_tag :stripeToken  %> 
+      
+        <% unless user_signed_in?  %>
           <button id='payNowButton' class='btn btn-primary'>Pay Now</button>
         <% else %>
         <div class="btn btn-warning">You need to add some items to your checkout</div>
         <% end %>
       <% end %> 
+  <% end %>
         <br />
 
           <script>

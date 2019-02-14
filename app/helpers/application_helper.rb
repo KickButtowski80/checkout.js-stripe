@@ -1,4 +1,5 @@
 module ApplicationHelper
+    
     def admin_types
         ['admin user']
     end
@@ -46,13 +47,15 @@ module ApplicationHelper
             result +=                        
             "<div class='card' style='margin-right: 20px;'>       
                   <div class='card-body'>
-                    <h5 class='card-title btn btn-info'>#{item.name}</h5>
+                    <a href='items/#{item_id}'  class='btn btn-primary'>
+                        #{item.name}
+                    </a>
                     <p class='card-text'>
                          purchased time was <span class=' btn btn-info'>#{number} </span>
                          in total of 
                          <span class=' btn btn-info'>#{total_price}</span>
                     </p>  
-                        <a href='items/#{item_id}' class='btn btn-primary'> see Item </a>
+                       
                   </div>
                 </div> "
         end
@@ -61,6 +64,13 @@ module ApplicationHelper
     
     end
     
-    
+        def current_price price
+        if price.nil?
+            "<span class='btn btn-secondary'>0.0 </span> <br />
+            <p class='btn btn-warning'> please add some orders to your checkout  </p>".html_safe
+        else
+            price
+        end
+    end
     
 end
