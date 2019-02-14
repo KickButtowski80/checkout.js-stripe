@@ -3,8 +3,7 @@ class OrdersController < ApplicationController
    responders :flash
    respond_to :json
   def index
-    @orders = Order.all  
-    
+    @orders = Order.all      
     # $sum = 0.0
     # item_ids = []
     # @orders.load.each do |order|
