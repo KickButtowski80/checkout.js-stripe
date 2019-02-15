@@ -31,7 +31,7 @@ class OrdersController < ApplicationController
     
     respond_to do |format|
       if @order.save!
-            format.html {redirect_to root_path , notice: "item added to your order list"}
+            format.html {redirect_to root_path ,   notice: "item added to your order list"}
             format.json 
       end
     end
