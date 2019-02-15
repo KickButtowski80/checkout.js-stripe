@@ -4,20 +4,22 @@ class OrdersController < ApplicationController
    respond_to :json
   def index
     
-     @orders = Order.all.joins(:user).where(user_id: current_user.id)
+    @orders = Order.joins(:user).where(user_id: current_user.id)
     if @orders
     
-    # $sum = 0.0
-    # item_ids = []
-    # @orders.load.each do |order|
-    #   # item_ids.push(order.item.id)
-    #   # $sum = $sum + order.item.price
-    # end
+    $sum = 0.0
+    item_ids = []
+    @orders.load.each do |order|
+      item_ids.push(order.item_id)
+      $sum = $sum + order.item.price
+    end
     # array.inject(:+)
     # debugger
     
-     @total_price = @orders.joins(:item).pluck(:price).inject(:+)
-     @item_ids = @orders.joins(:item).pluck(:id)
+    #  @total_price = Order.joins(:item).pluck(:price).inject(:+)
+     @total_price = $sum
+    #  @item_ids = Order.joins(:item).pluck(:id)
+    @item_ids = item_ids
     end 
   end
   

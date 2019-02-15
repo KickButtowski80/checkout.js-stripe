@@ -1,5 +1,5 @@
 class Purchase < ApplicationRecord
-  belongs_to :item, optional: true
-  belongs_to :user
+  has_many :items , dependent: :delete_all 
+  belongs_to :user, optional: true
   
 end

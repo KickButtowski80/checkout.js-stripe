@@ -65,7 +65,7 @@ module ApplicationHelper
     end
     
         def current_price price
-        if price.nil?
+        if price == 0.0
             "<span class='btn btn-secondary'>0.0</span> <br />
             <p class='btn btn-warning'> please add some orders to your checkout  </p>".html_safe
         else

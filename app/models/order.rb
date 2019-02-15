@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
-    # belongs_to :purchase 
+   
     belongs_to :user
-    belongs_to :item
+    belongs_to :item 
     
     
     def self.total_price_order

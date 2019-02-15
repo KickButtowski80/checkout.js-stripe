@@ -2,9 +2,9 @@
      <%= listing_orders_times( @orders.load) if  @orders %>
 </div>
 <p style="margin-top: 15px;">
-  Total : 
-    <%= current_price @total_price %>
+  Total : <%= current_price @total_price %>
 </p> 
+ 
 <%# unless @total_price.nil? && @item_ids.nil? %>
      <%= form_tag charges_path(amount:  @total_price  , item_ids: @item_ids )  , id: 'paying-form' do %>
           <% if flash[:error].present? %>
@@ -13,8 +13,8 @@
             </div>
           <% end %>
           <%= hidden_field_tag :stripeToken  %> 
-          <%unless @total_price.nil? %>
-          <button id='payNowButton' class='btn btn-primary'>Pay Now</button>
+          <%if  @total_price != 0.0 %>
+            <button id='payNowButton' class='btn btn-primary'>Pay Now</button>
           <% end %>
       <% end %> 
   <%# end %>
