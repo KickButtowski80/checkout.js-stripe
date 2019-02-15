@@ -24,7 +24,7 @@ def create
   # debugger 
   if params.has_key?(:item_ids)
      params[:item_ids].map(&:to_i).each do |i_id|
-      Purchase.create! item_id: i_id, user_id: current_user.id
+      Purchase.create user_id: current_user.id, item_id: i_id
     end
   else
      Purchase.create item_id: params[:format] , user_id: current_user.id  
