@@ -1,0 +1,13 @@
+<div class="container">
+    <div class="row" style="margin-top: 22px;">
+        <%=listing_purchased_times current_user.purchases.load %>  
+        <% if current_user.purchases.empty? %>
+            <div class='btn btn-warning'>You have not purchased any item yet </div>
+         <%end%>
+    </div>
+</div>
+
+
+
+
+    

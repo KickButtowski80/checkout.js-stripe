@@ -48,7 +48,10 @@ group :development do
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
   # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+  gem 'sqlite3', '~> 1.3.6'
+  gem "better_errors"
+  gem "binding_of_caller"
+  
 end
 
 
@@ -58,3 +61,9 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'stripe'
 gem 'figaro'
 gem 'pg'
+# gem 'rack-mini-profiler', require: false
+gem 'bootstrap'
+gem 'jquery-rails'
+gem 'devise'
+gem 'devise-bootstrap-views' 
+gem 'rails-erd', group: :development
